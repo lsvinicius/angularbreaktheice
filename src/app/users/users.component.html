@@ -1,0 +1,27 @@
+<div>
+  <div *ngFor="let u of users" (click)="displayUserInfo(u.id)">
+    {{u.name}}
+  </div>
+  <div *ngIf="show_user_data">
+      <h3>User information</h3>
+      <img width="200" height="200" [src]="this.current_user.avatar" alt="Character picture"/>
+      <ul>
+          <li>Name: <input type="text" value={{this.current_user.name}} #nameInput/></li>
+          <li>Role: 
+              <select #roleInput>
+                <option *ngFor="let role of differentRoles(roles)">
+                  {{role}}
+                </option>
+                <option selected="selected"> <!-- only the current role will be selected -->
+                  {{this.current_user.role}}
+                </option>
+              </select>
+          </li>
+      </ul>
+      <h3>Quotes</h3>
+      <ul>
+        <li *ngFor="let quote of currentUserQuotes()">{{quote}}</li>
+      </ul>
+      <button md-button (click)="saveChanges(nameInput.value, roleInput.value)">Save</button>
+  </div>
+</div>
